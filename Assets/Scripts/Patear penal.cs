@@ -7,6 +7,7 @@ public class Patearpenal : MonoBehaviour
     [SerializeField] private Rigidbody balonRb; 
     [SerializeField] private GameObject muroPorteria;
     [SerializeField] private Transform jugadorTransform; 
+    [SerializeField] private Portero scriptPortero; // <-- CONEXIÓN CON EL PORTERO
     [SerializeField] private float fuerzaHorizontalDisparo = 20f; 
     [SerializeField] private float elevacionMinima = 2f; 
     [SerializeField] private float elevacionMaxima = 9f; 
@@ -16,30 +17,26 @@ public class Patearpenal : MonoBehaviour
     private bool estaCargandoPotencia = false;
     private float timerCargaActual = 0f;
     private Vector3 direccionBaseTiro = Vector3.zero;
+    private Vector3 objetivoTiro; 
     private bool yaPateo = false;
     private bool estaCorriendo = false;
     private Vector3 fuerzaGuardada = Vector3.zero;
-
     void Update()
     {
         if (yaPateo) return;
-
         if (estaCorriendo)
         {
             CorrerHaciaBalon();
             return; 
         }
-
         if (Input.GetMouseButtonDown(0))
         {
             ComenzarCarga();
         }
-
         if (estaCargandoPotencia)
         {
             CargarPotencia();
         }
-
         if (Input.GetMouseButtonUp(0))
         {
             SoltarDisparo();
@@ -49,19 +46,17 @@ public class Patearpenal : MonoBehaviour
     void ComenzarCarga()
     {
         Ray rayoMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
         if (Physics.Raycast(rayoMouse, out RaycastHit infoGolpe, 100f)) 
         {
             if (infoGolpe.collider.gameObject == muroPorteria)
             {
-                Vector3 puntoClic = infoGolpe.point;
-                direccionBaseTiro = (puntoClic - balonRb.transform.position).normalized; 
+                objetivoTiro = infoGolpe.point; // Guardamos el punto del clic
+                direccionBaseTiro = (objetivoTiro - balonRb.transform.position).normalized; 
                 estaCargandoPotencia = true;
                 timerCargaActual = 0f;
             }
         }
     }
-
     void CargarPotencia()
     {
         timerCargaActual += Time.deltaTime;
@@ -86,6 +81,13 @@ public class Patearpenal : MonoBehaviour
         fuerzaGuardada.y = elevacionFinal; 
 
         estaCorriendo = true;
+
+        // --- EL AVISO AL PORTERO ---
+        if (scriptPortero != null)
+        {
+            // Le pasamos la coordenada exacta a la que disparaste
+            scriptPortero.IntentarAtajar(objetivoTiro);
+        }
     }
 
     void CorrerHaciaBalon()

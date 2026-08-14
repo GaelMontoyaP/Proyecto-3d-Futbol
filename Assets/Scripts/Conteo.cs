@@ -5,8 +5,7 @@ using TMPro;
 
 public class Conteo : MonoBehaviour
 {
-    [Header("Marcador UI")]
-    [Tooltip("Arrastra aquí tu texto de TextMeshPro de la jerarquía")]
+
     [SerializeField] private TextMeshProUGUI textoGoles; 
 
     // El contador numérico secreto
