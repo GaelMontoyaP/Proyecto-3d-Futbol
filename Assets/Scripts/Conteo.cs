@@ -5,25 +5,35 @@ using TMPro;
 
 public class Conteo : MonoBehaviour
 {
-
+    [Header("Marcador UI")]
     [SerializeField] private TextMeshProUGUI textoGoles; 
 
-    // El contador numérico secreto
     private int goles = 0; 
 
-    // Esta función se activa SOLA cuando el balón atraviesa un "Trigger"
+    // Start se ejecuta automáticamente una vez al arrancar el juego
+    private void Start()
+    {
+        // 1. CARGAR: Leemos la memoria. Si no hay datos, empieza en 0.
+        goles = PlayerPrefs.GetInt("GolesGuardados", 0);
+        
+        // Actualizamos el texto en la pantalla para que muestre lo que cargamos
+        textoGoles.text = "Goles: " + goles; 
+    }
+
     private void OnTriggerEnter(Collider otro)
     {
-        // Preguntamos si lo que tocamos tiene el Tag "Gol"
         if (otro.gameObject.CompareTag("Pared"))
         {
-            // Sumamos 1 a nuestro contador
             goles++; 
-
-            // Actualizamos el texto en la pantalla
             textoGoles.text = "Goles: " + goles; 
 
-            Debug.Log("¡GOOOOOL!");
+            // 2. GUARDAR: Metemos el nuevo número a la memoria
+            PlayerPrefs.SetInt("GolesGuardados", goles);
+            
+            // Forzamos a Unity a guardar el archivo físicamente en este instante
+            PlayerPrefs.Save(); 
+
+            Debug.Log("¡GOOOOOL! Total guardado en memoria: " + goles);
         }
     }
 }
