@@ -7,33 +7,71 @@ public class Conteo : MonoBehaviour
 {
     [Header("Marcador UI")]
     [SerializeField] private TextMeshProUGUI textoGoles; 
+    [SerializeField] private TextMeshProUGUI textoRival; 
 
     private int goles = 0; 
+    private int puntosRival = 0; 
+    
+    private bool yaPuntuo = false; 
 
-    // Start se ejecuta automáticamente una vez al arrancar el juego
     private void Start()
     {
-        // 1. CARGAR: Leemos la memoria. Si no hay datos, empieza en 0.
+        // Cargar goles
         goles = PlayerPrefs.GetInt("GolesGuardados", 0);
-        
-        // Actualizamos el texto en la pantalla para que muestre lo que cargamos
         textoGoles.text = "Goles: " + goles; 
+        
+        // Cargar puntos del rival
+        puntosRival = PlayerPrefs.GetInt("RivalGuardados", 0);
+        if (textoRival != null)
+        {
+            textoRival.text = "Rival: " + puntosRival; 
+        }
     }
 
     private void OnTriggerEnter(Collider otro)
     {
+        if (yaPuntuo) return; 
+
         if (otro.gameObject.CompareTag("Pared"))
         {
+            yaPuntuo = true;
             goles++; 
             textoGoles.text = "Goles: " + goles; 
-
-            // 2. GUARDAR: Metemos el nuevo número a la memoria
-            PlayerPrefs.SetInt("GolesGuardados", goles);
             
-            // Forzamos a Unity a guardar el archivo físicamente en este instante
+            PlayerPrefs.SetInt("GolesGuardados", goles);
             PlayerPrefs.Save(); 
-
-            Debug.Log("¡GOOOOOL! Total guardado en memoria: " + goles);
+            Debug.Log("¡GOOOOOL TUYO!");
         }
+        else if (otro.gameObject.CompareTag("Falla"))
+        {
+            yaPuntuo = true;
+            // Quitamos la suma de puntos. Solo registramos que el turno acabó.
+            Debug.Log("¡El balón salió de la cancha! No hay puntos para nadie.");
+        }
+    }
+
+    private void OnCollisionEnter(Collision choque)
+    {
+        if (yaPuntuo) return; 
+
+        if (choque.gameObject.CompareTag("Portero"))
+        {
+            yaPuntuo = true;
+            // Quitamos la suma de puntos.
+            Debug.Log("¡El portero atajó el balón! No hay puntos para nadie.");
+        }
+    }
+
+    // Dejamos esta función lista para cuando el rival realmente patee y anote
+    public void SumarPuntoRival()
+    {
+        puntosRival++;
+        if (textoRival != null) 
+        {
+            textoRival.text = "Rival: " + puntosRival;
+        }
+        
+        PlayerPrefs.SetInt("RivalGuardados", puntosRival);
+        PlayerPrefs.Save();
     }
 }

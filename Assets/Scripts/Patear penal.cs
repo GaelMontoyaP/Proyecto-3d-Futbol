@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Patearpenal : MonoBehaviour
 {
@@ -18,9 +19,17 @@ public class Patearpenal : MonoBehaviour
     [SerializeField] private float elevacionMaxima = 9f; 
     [SerializeField] private float tiempoCargaMax = 2f; 
 
+    [Header("Cambio de Escena (NUEVO)")]
+    [Tooltip("El nombre exacto de tu siguiente escena (respetando mayúsculas y espacios)")]
+    [SerializeField] private string nombreSiguienteEscena = "Escena 2"; 
+    [Tooltip("Cuántos segundos espera después de patear para cambiar de escena")]
+    [SerializeField] private float tiempoParaCambiar = 5f; 
+
     [Header("Movimiento del Jugador")]
     [SerializeField] private float velocidadCarrera = 5f; 
     [SerializeField] private float distanciaParaPatear = 0.8f; 
+
+
 
     private bool estaCargandoPotencia = false;
     private float timerCargaActual = 0f;
@@ -119,11 +128,19 @@ public class Patearpenal : MonoBehaviour
 
             if (scriptPortero != null)
             {
-                // --- EL GRAN CAMBIO ---
-                // Simplemente le "pasamos" el objeto del balón al portero.
-                // Él se encarga del resto.
                 scriptPortero.IniciarAtajada(balonRb.transform);
             }
+
+            // --- ESTO ES LO NUEVO ---
+            // Activamos una alarma que llamará a la función "CambiarEscena" después del tiempo que elegiste
+            Invoke("CambiarEscena", tiempoParaCambiar);
         }
+    }
+
+    // Función que se activa cuando suena la alarma del Invoke
+    private void CambiarEscena()
+    {
+        Debug.Log("Cambiando a la escena: " + nombreSiguienteEscena);
+        SceneManager.LoadScene(nombreSiguienteEscena);
     }
 }
