@@ -7,6 +7,8 @@ TagManager:
   - Pared
   - Falla
   - Portero
+  - Red
+  - Balon
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Red
   - 
   - 
   - 
