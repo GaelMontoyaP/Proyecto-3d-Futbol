@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JugadorPortero : MonoBehaviour
 {
@@ -24,7 +25,10 @@ public class JugadorPortero : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            // ¡EL CANDADO DE TITANIO!
+            // Le decimos a Unity desde el código: "Congela las rotaciones Y TAMBIÉN congela la posición Z"
+            // El símbolo "|" sirve para sumar ambas reglas.
+            rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
         }
     }
 
@@ -85,24 +89,32 @@ public class JugadorPortero : MonoBehaviour
         Invoke("TerminarSalto", 1.5f);
     }
 
-    private void OnCollisionEnter(Collision choque)
+   private void OnCollisionEnter(Collision choque)
     {
         if (estaSaltando && choque.gameObject.CompareTag("Balon"))
         {
-            TerminarSalto();
-        }
-        if (estaSaltando && choque.gameObject.CompareTag("Balon"))
-        {
-            // Detenemos el balón en seco al tocar las manos del portero
+            // 1. Matamos la velocidad del balón en seco ANTES de soltar al portero
             Rigidbody balonRb = choque.gameObject.GetComponent<Rigidbody>();
             if (balonRb != null)
             {
-                balonRb.velocity = Vector3.zero; // Mata la velocidad
-                balonRb.angularVelocity = Vector3.zero; // Mata el giro
+                balonRb.velocity = Vector3.zero; 
+                balonRb.angularVelocity = Vector3.zero; 
             }
 
+            // 2. Nos aseguramos de que el portero tampoco tenga fuerzas residuales
+            if (rb != null)
+            {
+                rb.velocity = Vector3.zero;
+            }
+
+            // 3. Ahora sí, que caiga al piso
             TerminarSalto();
+            Invoke("RegresarAEscena1", 2f);
+        }
     }
+     void RegresarAEscena1()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 
     private void TerminarSalto()

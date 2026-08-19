@@ -403,6 +403,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!136 &133493433
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133493428}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.83558655
+  m_Height: 2.2627392
+  m_Direction: 1
+  m_Center: {x: -0.04005432, y: -0.06305981, z: 0.0009765625}
 --- !u!1 &355607683 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 631475601059415042, guid: a9ca23b685b62e94e84d2035d0cf417d, type: 3}
@@ -1536,7 +1559,7 @@ GameObject:
   - component: {fileID: 896756933}
   m_Layer: 2
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Pared
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2447,6 +2470,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1975457108487340, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1721643730}
+    - targetCorrespondingSourceObject: {fileID: 1975457108487340, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1721643731}
   m_SourcePrefab: {fileID: 100100000, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 3}
 --- !u!1 &1721643724 stripped
 GameObject:
@@ -2479,7 +2505,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1721643730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2493,6 +2519,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alturaMaxima: 6
+--- !u!114 &1721643731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721643724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b02c370094e9345bb5f78ed84dc3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textoGoles: {fileID: 45442579}
+  textoRival: {fileID: 557814814}
 --- !u!43 &1788638562
 Mesh:
   m_ObjectHideFlags: 0
@@ -2779,6 +2819,10 @@ PrefabInstance:
       value: SoccerPlayerRed
       objectReference: {fileID: 0}
     - target: {fileID: 9055599286513668442, guid: 16f2a6a6321bb894c984093ed7270f45, type: 3}
+      propertyPath: m_text
+      value: De Gea
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055599286513668442, guid: 16f2a6a6321bb894c984093ed7270f45, type: 3}
       propertyPath: m_textAlignment
       value: 65535
       objectReference: {fileID: 0}
@@ -2797,6 +2841,10 @@ PrefabInstance:
     - target: {fileID: 9055599286513668516, guid: 16f2a6a6321bb894c984093ed7270f45, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055599287177632130, guid: 16f2a6a6321bb894c984093ed7270f45, type: 3}
+      propertyPath: m_text
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9055599287177632130, guid: 16f2a6a6321bb894c984093ed7270f45, type: 3}
       propertyPath: m_textAlignment
@@ -2828,6 +2876,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3132827565773464112, guid: 16f2a6a6321bb894c984093ed7270f45, type: 3}
       insertIndex: -1
       addedObject: {fileID: 133493431}
+    - targetCorrespondingSourceObject: {fileID: 3132827565773464112, guid: 16f2a6a6321bb894c984093ed7270f45, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 133493433}
   m_SourcePrefab: {fileID: 100100000, guid: 16f2a6a6321bb894c984093ed7270f45, type: 3}
 --- !u!1 &1998768423
 GameObject:
