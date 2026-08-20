@@ -9,7 +9,7 @@ public class menu : MonoBehaviour
     public void EmpezarJuego()
     {
         // Cambia "NombreDeTuEscena1" por el nombre de tu escena donde tiras el primer penal
-        SceneManager.LoadScene("SampleScene"); 
+        SceneManager.LoadScene("tirar"); 
         PlayerPrefs.DeleteAll();
     }
 

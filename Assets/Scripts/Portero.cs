@@ -91,6 +91,7 @@ public class Portero : MonoBehaviour
         if (estaAtajando)
         {
             TerminarAtajada();
+            Cerebro.Instancia.RegistrarTiro(false, true);
         }
     }
 

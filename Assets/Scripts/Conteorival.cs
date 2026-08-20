@@ -30,29 +30,30 @@ public class Conteorival : MonoBehaviour
 
     private void OnTriggerEnter(Collider otro)
     {
-        if (yaPuntuo) return; 
+        if (yaPuntuo) return;
 
         if (otro.gameObject.CompareTag("Pared"))
         {
             yaPuntuo = true;
-            goles++; 
-            textoGoles.text = "Goles: " + goles; 
-            
+            goles++;
+            textoGoles.text = "Goles: " + goles;
+
             PlayerPrefs.SetInt("RivalGuardados", goles);
-            PlayerPrefs.Save(); 
-            Debug.Log("¡GOOOOOL TUYO!");
-            Invoke("RegresarAEscena1", 2f);
+            PlayerPrefs.Save();
+            Debug.Log("¡GOOOOOL DEL RIVALLLL!");
+
+            // ¡AQUÍ ES DONDE DEBE IR EL AVISO DE GOL! (Sí fue gol, No tiraste tú)
+            Cerebro.Instancia.RegistrarTiro(true, false);
         }
-      
         else if (otro.gameObject.CompareTag("Falla"))
         {
             yaPuntuo = true;
-            // Quitamos la suma de puntos. Solo registramos que el turno acabó.
             Debug.Log("¡El balón salió de la cancha! No hay puntos para nadie.");
+
+            // ¡NUEVO! Hay que avisarle al cerebro que el rival voló el balón (No fue gol, No tiraste tú)
+            Cerebro.Instancia.RegistrarTiro(false, false);
         }
-    }
-    void RegresarAEscena1()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        
+        // (Borré el bloque "Balon" de hasta abajo porque el aviso ya está donde corresponde)
     }
 }

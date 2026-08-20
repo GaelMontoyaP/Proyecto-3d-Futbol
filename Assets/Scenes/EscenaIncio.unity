@@ -404,6 +404,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271178044}
   m_CullTransparentMesh: 1
+--- !u!1 &300990696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 300990698}
+  - component: {fileID: 300990697}
+  m_Layer: 0
+  m_Name: Cerebro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &300990697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300990696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ce71ae4a54d6347aa3362013e91346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  golesJugador: 0
+  golesRival: 0
+  tirosJugador: 0
+  tirosRival: 0
+--- !u!4 &300990698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300990696}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1024.523, y: 382.85788, z: 13.690761}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &307376103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,3 +1322,4 @@ SceneRoots:
   - {fileID: 270293477}
   - {fileID: 307376106}
   - {fileID: 143089141}
+  - {fileID: 300990698}

@@ -37,6 +37,7 @@ public class Conteo : MonoBehaviour
             yaPuntuo = true;
             goles++; 
             textoGoles.text = "Goles: " + goles; 
+            Cerebro.Instancia.RegistrarTiro(true, true);
             
             PlayerPrefs.SetInt("GolesGuardados", goles);
             PlayerPrefs.Save(); 

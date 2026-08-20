@@ -109,7 +109,7 @@ public class JugadorPortero : MonoBehaviour
 
             // 3. Ahora sí, que caiga al piso
             TerminarSalto();
-            Invoke("RegresarAEscena1", 2f);
+            Cerebro.Instancia.RegistrarTiro(false, false);
         }
     }
      void RegresarAEscena1()
